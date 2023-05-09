@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sammeuss <sammeuss@student.42.fr>          +#+  +:+       +#+         #
+#    By: smunio <smunio@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/03 08:48:44 by sammeuss          #+#    #+#              #
-#    Updated: 2023/05/03 13:33:13 by sammeuss         ###   ########.fr        #
+#    Updated: 2023/05/09 12:12:11 by smunio           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ $(NAME): $(SOBJS) $(COBJS)
 		@make -C libft bonus
 		@$(CC) $(CFLAGS) -o server $(SOBJS) $(LIBFT_DIR)libft.a
 		@$(CC) $(CFLAGS) -o client $(COBJS) $(LIBFT_DIR)libft.a
-		@echo "$(PRINT_PREFIX)\033[0;38;5;226m Done \033[0m\n"
+		@echo "$(PRINT_PREFIX)\033[0;38;5;226m Compiling Done \033[0m\n"
 
 $(DIR_OBJS)%.o :	$(DIR_SRCS)%.c $(OBJF)
 				@mkdir -p $(DIR_OBJS)

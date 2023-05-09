@@ -3,31 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sammeuss <sammeuss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smunio <smunio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:21:07 by sammeuss          #+#    #+#             */
-/*   Updated: 2023/05/04 14:10:24 by sammeuss         ###   ########.fr       */
+/*   Updated: 2023/05/09 15:05:24 by smunio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mini_talk.h"
 
+int		size;
+
 void	error(pid_t pid_client, int *bit, int *i, char *str)
 {
-	kill(pid_client, SIGUSR1);
-	str = NULL;
+	(void)pid_client;
 	*bit = 0;
 	*i = 0;
-	ft_printf("\n");
 	if (str)
 		free(str);
 }
 
+char	*ft_strjoin_char(char *s1, char s2)
+{
+	int		sizetotal;
+	char	*chainjoin;
+	size_t	i;
+
+	i = -1;
+	if (s1 && s2)
+		sizetotal = ft_strlen(s1) + 1;
+	if (s1 && !s2)
+		sizetotal = ft_strlen(s1);
+	if (!s1 && s2)
+		sizetotal = 1;
+	chainjoin = malloc(sizeof(char) * (sizetotal + 1));
+	if (!chainjoin)
+		return (NULL);
+	if (s1)
+		while (++i < ft_strlen(s1))
+			chainjoin[i] = s1[i];
+	if (!s1)
+		i++;
+	if (s2)
+		chainjoin[i] = s2;
+	chainjoin[i + 1] = '\0';
+	return (chainjoin);
+}
+
 void	sigusr(int sig, siginfo_t *info, void *context)
 {
-	static int	bit = 0;
-	static int	i = 0;
-	static char	*str = NULL;
+	static int		bit = 0;
+	static int		i = 0;
+	static char		*str = NULL;
 
 	(void) info;
 	(void) context;
@@ -36,14 +63,11 @@ void	sigusr(int sig, siginfo_t *info, void *context)
 	bit++;
 	if (bit == 8)
 	{
-		if (i < 0 || i > 0x7F)
-			error(info->si_pid, &bit, &i, str);
+		if (i >= 0x00 && i <= 0x7F)
+			str = ft_strjoin_char(str, i);
 		else
-		{
-			ft_printf("%c", i);
-			// str = ft_strjoin_char(str, i);
-		}
-		if (i == 0)
+			exit(0);
+		if (i == 0 || ft_strlen(str) > 1000)
 		{
 			ft_printf("%s", str);
 			str = NULL;
@@ -52,7 +76,21 @@ void	sigusr(int sig, siginfo_t *info, void *context)
 		bit = 0;
 		i = 0;
 	}
+	(usleep(50), kill(info->si_pid, SIGUSR2));
 }
+
+// void	get_size(int sig, siginfo_t *info, void *context)
+// {
+// 	static int	bit = 0;
+// 	static int	i = 0;
+
+// 	(void)context;
+// 	(void)info;
+// 	if (sig == SIGUSR2)
+// 		i = i | (0x01 << bit);
+// 	bit++;
+// 	printf("%d\n", i);
+// }
 
 int	main(void)
 {
