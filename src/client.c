@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smunio <smunio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sammeuss <sammeuss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:21:09 by sammeuss          #+#    #+#             */
-/*   Updated: 2023/05/09 15:05:21 by smunio           ###   ########.fr       */
+/*   Updated: 2023/05/10 11:34:59 by sammeuss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,35 +40,12 @@ void	char_to_bit(int pid, char c)
 	}
 }
 
-// void	send_size(int pid, char **argv)
-// {
-// 	int	bit;
-// 	int	i;
-// 	int	size;
-
-// 	bit = 0;
-// 	i = 32;
-// 	size = ft_strlen(argv[2]);
-// 	while (i > 0)
-// 	{
-// 		bit = size % 2;
-// 		if (bit == 0)
-// 			kill(pid, SIGUSR1);
-// 		else if (bit == 1)
-// 			kill(pid, SIGUSR2);
-// 		i--;
-// 		size = size / 2;
-// 	}
-// }
-
 int	main(int argc, char **argv)
 {
 	int					pid;
 	int					i;
-	int					u;
 	struct sigaction	s_sigaction;
 
-	u = 0;
 	i = 0;
 	pid = ft_atoi(argv[1]);
 	s_sigaction.sa_sigaction = nothing;

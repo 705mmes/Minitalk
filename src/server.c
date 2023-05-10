@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smunio <smunio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sammeuss <sammeuss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:21:07 by sammeuss          #+#    #+#             */
-/*   Updated: 2023/05/09 15:05:24 by smunio           ###   ########.fr       */
+/*   Updated: 2023/05/10 11:34:46 by sammeuss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mini_talk.h"
-
-int		size;
 
 void	error(pid_t pid_client, int *bit, int *i, char *str)
 {
@@ -78,19 +76,6 @@ void	sigusr(int sig, siginfo_t *info, void *context)
 	}
 	(usleep(50), kill(info->si_pid, SIGUSR2));
 }
-
-// void	get_size(int sig, siginfo_t *info, void *context)
-// {
-// 	static int	bit = 0;
-// 	static int	i = 0;
-
-// 	(void)context;
-// 	(void)info;
-// 	if (sig == SIGUSR2)
-// 		i = i | (0x01 << bit);
-// 	bit++;
-// 	printf("%d\n", i);
-// }
 
 int	main(void)
 {
