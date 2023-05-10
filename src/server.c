@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sammeuss <sammeuss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smunio <smunio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:21:07 by sammeuss          #+#    #+#             */
-/*   Updated: 2023/05/10 11:34:46 by sammeuss         ###   ########.fr       */
+/*   Updated: 2023/05/10 14:23:15 by smunio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	sigusr(int sig, siginfo_t *info, void *context)
 			exit(0);
 		if (i == 0 || ft_strlen(str) > 1000)
 		{
-			ft_printf("%s", str);
+			ft_printf("%s\n", str);
 			str = NULL;
 			free(str);
 		}

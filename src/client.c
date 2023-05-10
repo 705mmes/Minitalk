@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sammeuss <sammeuss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smunio <smunio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:21:09 by sammeuss          #+#    #+#             */
-/*   Updated: 2023/05/10 11:34:59 by sammeuss         ###   ########.fr       */
+/*   Updated: 2023/05/10 14:21:13 by smunio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ int	main(int argc, char **argv)
 	struct sigaction	s_sigaction;
 
 	i = 0;
+	if (argc != 3)
+		return (0);
 	pid = ft_atoi(argv[1]);
 	s_sigaction.sa_sigaction = nothing;
 	s_sigaction.sa_flags = SA_SIGINFO;
 	sigaction(SIGUSR1, &s_sigaction, 0);
 	sigaction(SIGUSR2, &s_sigaction, 0);
-	if (argc != 3)
-		return (0);
 	while (argv[2][i])
 		char_to_bit(pid, argv[2][i++]);
 	char_to_bit(pid, 0);
